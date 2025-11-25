@@ -1,0 +1,20 @@
+on:
+  push:
+    branches:
+    - development
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v6.0.0
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v6.0.0
+    - name: Install dependencies
+      run: cd frontend; npm ci
+    - name: Build artifacts
+      run: cd frontend; npx vite build --base='https://development.opentextbookexchange.shop'
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v5.0.0
+      with:
+        path: frontend/dist
