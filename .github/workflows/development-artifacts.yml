@@ -33,4 +33,4 @@ jobs:
         role-to-assume: arn:aws:iam::980268628266:role/development-cd-role
 
     - name: Upload build artifacts to S3
-      run: aws s3 sync frontend/artifact s3://your-bucket-name/ --delete --acl public-read
+      run: aws s3 sync frontend/artifact s3://ote-frontend-source-development/ --delete --acl public-read
