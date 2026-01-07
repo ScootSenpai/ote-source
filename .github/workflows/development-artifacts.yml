@@ -16,16 +16,16 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js #${{ matrix.node-version }}
       uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+      #with:
+        #node-version: ${{ matrix.node-version }}
+        #cache: 'npm'
     - name: Install dependencies
       run: npm ci
     - name: Build artifacts
-      run: npx vite build --base='https://development.opentextbookexchange.shop'
+      run: npx vite build --base='https://development.opentextbookexchange.shop/artifact'
     - name: Upload Artifact
       uses: actions/upload-artifact@v5.0.0
       with:
-        path: dist
+        path: artifact
