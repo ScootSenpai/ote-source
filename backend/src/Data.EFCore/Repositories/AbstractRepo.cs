@@ -7,7 +7,7 @@ namespace OTE.Data.EFCore.Repositories;
 
 public abstract class AbstractRepo<TEntity, TDto>(OteContext context)
     where TEntity : class
-    where TDto : Dto<TEntity>
+    where TDto : IDto<TEntity>
 {
     private DbSet<TEntity> _dbSet = context.Set<TEntity>();
 

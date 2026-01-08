@@ -3,7 +3,7 @@ using OTE.Data.EFCore.Entities;
 
 namespace OTE.Data.EFCore.Dtos;
 
-public class SchoolDto : Dto<SchoolEntity>
+public class SchoolDto : IDto<SchoolEntity>
 {
     [MaxLength(255)]
     public string SchoolName { get; set; } = string.Empty;
