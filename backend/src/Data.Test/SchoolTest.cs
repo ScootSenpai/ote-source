@@ -41,7 +41,9 @@ public class Tests : IDisposable
             City = "Nowhere"
         };
 
-        Assert.Equal(1, await _repo.Insert(dto));
+        var entity = dto.Map();
+
+        Assert.Equal(1, await _repo.Insert(entity));
 
         var all = await _repo.GetAll();
         Assert.Single(all);
@@ -65,7 +67,9 @@ public class Tests : IDisposable
             City = "Nowhere"
         };
 
-        Assert.Equal(1, await _repo.Update(key, dto));
+        entity = dto.Map();
+
+        Assert.Equal(1, await _repo.Update(key, entity));
         Assert.Single(all);
         Assert.Equal(JsonSerializer.Serialize(new SchoolEntity
         {
