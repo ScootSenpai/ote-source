@@ -1,10 +1,9 @@
 using OTE.Data.EFCore.Contexts;
-using OTE.Data.EFCore.Dtos;
 using OTE.Data.EFCore.Entities;
 
 namespace OTE.Data.EFCore.Repositories;
 
 /// <summary>`SchoolEntity` implementation of `AbstractRepo`.</summary>
 /// <param name="context">The `OteContext` the repository uses.</summary>
-public class SchoolRepo(OteContext context) : AbstractRepo<SchoolEntity, SchoolDto>(context)
+public class SchoolRepo(OteContext context) : AbstractRepo<SchoolEntity>(context)
 {}
