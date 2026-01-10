@@ -1,23 +1,35 @@
-name: Upload React Dev Artifacts to S3
+name: ote-workflow
 
-permissions:
-  contents: read
-  id-token: write
-
-on:
-  workflow_run:
-    workflows: ["Test Backend API"]
-    types:
-    - completed
+on: [push, pull_request]
 
 jobs:
-  development-artifacts:
-    if: ${{ github.event.workflow_run.event == 'push'
-        && github.event.workflow_run.conclusion == 'success'
-        && github.event.workflow_run.head_branch == 'development' }}
+  backend-test:
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:8.0
     runs-on: ubuntu-latest
-    steps:
 
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Create secrets.json
+      run: |
+        mkdir -p ~/.microsoft/usersecrets/7dd46374-7b55-442e-b4b3-1ae375510d4e
+        echo '{ "ConnectionStrings:OteDb": "${{ secrets.AWS_RDS_CONNECTION_STRING }}" }' > ~/.microsoft/usersecrets/7dd46374-7b55-442e-b4b3-1ae375510d4e/secrets.json
+
+    - name: Run tests
+      run: |
+        cd backend
+        dotnet test
+
+
+  frontend-upload-development:
+    needs: [backend-test]
+    if: ${{ github.event_name == 'push'
+        && github.ref == 'refs/heads/development' }}
+    runs-on: ubuntu-latest
+
+    steps:
     - name: Checkout
       uses: actions/checkout@v4
 
