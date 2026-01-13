@@ -23,7 +23,7 @@ function ExplorePage() {
             { /** Trying a new sidebar */}
             <section className="bg-gray-200">
                 <nav className="flex h-screen">
-                    {/** This navbar needs to be fixed so that it will only be implemented on the side of the page alone */}
+                    {/** Possible feature of hiding the navbar by the click of an in-arrow button (not important to functionality right now)*/}
                     <Navbar /> 
 
                     <main className="flex-1 overflow-y-auto">
