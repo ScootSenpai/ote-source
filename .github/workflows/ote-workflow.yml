@@ -1,0 +1,58 @@
+name: ote-workflow
+
+on: [push, pull_request]
+
+jobs:
+  backend-test:
+    container:
+      image: mcr.microsoft.com/dotnet/sdk:10.0
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Create secrets.json
+      run: |
+        mkdir -p ~/.microsoft/usersecrets/7dd46374-7b55-442e-b4b3-1ae375510d4e
+        echo '{ "ConnectionStrings:OteDb": "${{ secrets.AWS_RDS_CONNECTION_STRING }}" }' > ~/.microsoft/usersecrets/7dd46374-7b55-442e-b4b3-1ae375510d4e/secrets.json
+
+    - name: Run tests
+      run: |
+        cd backend
+        dotnet test
+
+
+  frontend-upload-development:
+    needs: [backend-test]
+    if: ${{ github.event_name == 'push'
+        && github.ref == 'refs/heads/development'
+        && github.repository == 'Michael-Mark-Edu/ote-source' }}
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+
+    - name: Install dependencies
+      run: |
+        cd frontend
+        npm ci
+
+    - name: Build artifacts
+      run: |
+        cd frontend
+        npx vite build --base='https://development.opentextbookexchange.shop/artifact' --outDir artifact
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v5.1.0
+      with:
+        aws-region: us-west-2
+        aws-access-key-id: ${{ secrets.AWS_DEVELOPMENT_CD_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_DEVELOPMENT_CD_SECRET_ACCESS_KEY }}
+
+    - name: Upload build artifacts to S3
+      run: aws s3 sync frontend/artifact s3://ote-frontend-source-development/artifact --delete
