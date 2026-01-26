@@ -21,7 +21,9 @@ function RootComponent() {
             <Link to="/" className="hover:text-gray-900 text-lg pl-40">Home</Link>
             <Link to="/explore" className="hover:text-gray-900 text-lg pl-10 border-l border-gray-300">Explore</Link>
             <Link to="/about" className="hover:text-gray-900 text-lg pl-10 border-l border-gray-300">About</Link>
-            <Link to="/test" className="hover:text-gray-900 text-lg pl-10 border-l border-gray-300">Testing</Link> 
+            {/** link to user upload page here, temporary placeholder until we get a dedicated upload area? (user profile or only on explore page?) */}
+            {/** possibly have condition hidden unless the user is logged in? */}
+            <Link to="/user_upload" className="hover:text-gray-900 text-lg pl-10 border-0 border-gray-300">Upload</Link> 
           </nav>
 
           {/* Search Bar */}
@@ -59,10 +61,10 @@ function RootComponent() {
           <div className="text-left mx-auto">
             <h3 className="font-semibold text-lg mb-3">Navigation</h3>
             <ul className="text-med text-gray-300 space-y-2">
-              <li><a href="#home" className="hover:text-white">Home</a></li>
-              <li><a href="#explore" className="hover:text-white">Explore</a></li>
-              <li><a href="#about" className="hover:text-white">About</a></li>
-              <li><a href="#sign-in" className="hover:text-white">Sign In</a></li>
+              <li><Link to="/" className="hover:text-white">Home</Link></li>
+              <li><Link to="/explore" className="hover:text-white">Explore</Link></li>
+              <li><Link to="/about" className="hover:text-white">About</Link></li>
+              <li><Link to="/sign_in" className="hover:text-white">Sign In</Link></li> 
             </ul>
           </div>
 
