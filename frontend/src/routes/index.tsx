@@ -30,34 +30,42 @@ function HomePage() {
       </section>
         
       {/* Popular Books Banner */}
-      <section className="h-[600px] flex items-center justify-center bg-gray-800">
-        <div className="mx-auto max-w-6xl w-full px-4 grid items-center gap-8 lg:grid-cols-4">
-
-          {/* Banner Images */}
-          {[1, 2, 3, 4].map((num) => (
-            <div key={num} className="rounded-2xl border p-2 shadow-sm bg-white">
-              <div className="aspect-9/16 rounded-xl grid place-items-center bg-blue-300 ">
-                <span className=" text-sm text-black">Book {num}</span>
-              </div>
-            </div>
-          ))}
+      <section className="h-auto justify-items-center-safe justify-center bg-gray-800">
+        <div className="mx-auto p-6 w-auto px-4 flex flex-wrap justify-items-center-safe justify-center-safe gap-8">
+          <h1 className="text-white font-bold mt-3 text-2xl">
+            Popular Reads
+          </h1>
         </div>
-      </section>
+          <div className="mx-auto p-6 w-auto px-4 flex flex-wrap justify-items-center-safe justify-center-safe gap-8 ">
+            
+            {[1, 2, 3, 4].map((num) => (
+              <div key={num} className="rounded-2xl border p-2 shadow-sm bg-white">
+                <div className="aspect-9/16 place-items-center w-60 grid rounded-xl bg-blue-300 ">
+                  <span className=" text-sm text-black">Book {num}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
 
       {/* Latest Books Banner */}
-      <section className="h-[600px] flex items-center justify-center bg-gray-400">
-        <div className="mx-auto max-w-6xl w-full px-4 grid items-center gap-8 lg:grid-cols-4">
-
-          {/* Banner Images */}
-          {[1, 2, 3, 4].map((num) => (
-            <div key={num} className="rounded-2xl border bg-white p-2 shadow-sm">
-              <div className="aspect-9/16 rounded-xl bg-blue-300 grid place-items-center">
-                <span className="text-black text-sm">Book {num}</span>
-              </div>
-            </div>
-          ))}
+        <section className="h-auto items-center justify-center bg-gray-400">
+          <div className="mx-auto p-6 w-auto px-4 flex flex-wrap justify-items-center-safe justify-center-safe gap-8">
+          <h1 className="text-white font-bold mt-3 text-2xl">
+            Latest Additions
+          </h1>
         </div>
-      </section>
+          <div className="mx-auto p-6 w-auto px-4 flex flex-wrap justify-items-center-safe justify-center gap-8">
+            {[1, 2, 3, 4].map((num) => (
+              <div key={num} className="rounded-2xl border p-2 shadow-sm bg-white">
+                <div className="aspect-9/16 place-items-center w-60 grid rounded-xl bg-blue-300 ">
+                  <span className=" text-sm text-black">Book {num}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
 
       {/* Mission Statement Banner */}
       <section className="h-[300px] flex items-center justify-center text-center bg-gray-200">
